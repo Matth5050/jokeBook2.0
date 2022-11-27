@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { db, auth } from './../firebase.js'
 import Header from './Header';
 import Jokes from './Jokes';
-import UserSignUpIn from "./UserSignUpIn.js";
+import UserSignUpIn from "./UserLogin.js";
 
-export default function Control() {
+export default function Control(props) {
 
 //   const [ authCheck, setAuthCheck ] = useState();
 
@@ -20,14 +20,14 @@ export default function Control() {
 //   }
 // }
 // test();
-
+const authCheck = props.authCheck
+console.log(authCheck);
   // if (auth.currentUser === null) {
     return (
       <React.Fragment>
         <Header />
-        <Jokes />
+        <Jokes authCheck={authCheck}/>
         {/* <Submit /> */}
-        <UserSignUpIn />
       </React.Fragment>
     )
   }

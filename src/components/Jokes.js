@@ -5,34 +5,13 @@ import jokes from '../data/cleanJokes.json';
 import { v4 } from 'uuid';
 import { UserContext } from "./UserContext";
 
+import { auth } from "../firebase.js";
+import { signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function Jokes() {
 
-  const { userName, setUserName} = useContext(UserContext);
-  const jokeRef = useRef();
-  // const [joke, setJoke] = useState();
-
-  // useEffect(() => { 
-  //   const unSubscribe = onSnapshot(
-  //     collection(db, "jokes"),
-  //     (collectionSnapshot) => {
-  //       const jokes = [];
-  //       collectionSnapshot.forEach((doc) => {
-  //         jokes.push({
-  //           id: doc.data().ID,
-  //           joke: doc.data().Joke,
-  //         });
-  //       });
-  //       setJoke(jokes);
-  //     },
-  //     (error) => {
-  //       console.log("error with the jokes!")
-  //     }
-  //   );
-  //   return () => unSubscribe();
-  // }, []);
-
-  // console.log(joke);
+export default function Jokes(props) {
 
   const submitStyle = {
     marginTop: 120
@@ -41,8 +20,14 @@ export default function Jokes() {
     marginTop: 210
   }
 
+
+  const authCheck = props.authCheck;
+  const { userName, setUserName} = useContext(UserContext);
+  const jokeRef = useRef();
+
   const [displayJoke, setDisplayJoke] = useState('Click for a joke!');
   const [submitIsVisible, setSubmitIsVisible] = useState(false);
+  const [logIsVisible, setlogIsVisible] = useState(false);
 
   function getRandomInt() {
     const min = Math.ceil(0);
@@ -61,14 +46,12 @@ export default function Jokes() {
     setSubmitIsVisible(!submitIsVisible);
   }
 
-  function clearField() {
-    document.getElementById("jokeForm").reset();
+  function changeToLogin() {
+    setlogIsVisible(true);
   }
 
   //adds joke to db
-
   const ref = collection(db, "userJokes")
-
   const handleSave = async (e) => {
     e.preventDefault();
     
@@ -86,14 +69,46 @@ export default function Jokes() {
     }
   }
 
+  function doSignOut() {
+    signOut(auth)
+      .then(function() {
+       
+      }).catch(function(error) {
+        
+      });
+  }
 
-function submitJoke() {
-  setDoc(doc(db, 'userJokes', userName),{
-    joke: jokeRef.current.value,
-    user: userName,
-    id: v4()
-  })
+
+// function submitJoke() {
+//   setDoc(doc(db, 'userJokes', userName),{
+//     joke: jokeRef.current.value,
+//     user: userName,
+//     id: v4()
+//   })
+// }
+const submitOptions = () => {
+  if (authCheck) {
+    return (
+      <>
+        <p>
+          Think you're funny? Submit you're own jokes here and see how the crowd feels!
+        </p>
+        <button type="click" onClick={() => changeView()} className="btn btn-primary">Submit Joke</button>
+      </>
+      )
+  } else {
+    return (
+    <>
+      <p>
+        Login or Signup to share your jokes 😊
+      </p>
+      <Link to="/login"><button type="click"  className="btn btn-primary">Login</button></Link>
+      <Link to="/signup"><button type="click"  className="btn btn-primary">Signup</button></Link>
+    </>
+    )
+  }
 }
+
 
   if (submitIsVisible === false) {
     return (
@@ -106,12 +121,10 @@ function submitJoke() {
           </div>
           <button type="click" onClick={() => getJoke()} className="btn btn-primary">Get Joke</button>
           <div style={submitStyle}>
-            <p>
-              Think you're funny? Submit you're own jokes here and see how the crowd feels!
-            </p>
-            <button type="click" onClick={() => changeView()} className="btn btn-primary">Submit Joke</button>
+            {submitOptions()}
           </div>
         </div>
+        <button type="click" onClick={() => doSignOut()} className="btn btn-primary">sign out</button>
       </React.Fragment>
     )
   } else {

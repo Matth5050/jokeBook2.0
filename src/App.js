@@ -3,6 +3,9 @@ import { db, auth } from './firebase'
 import Control from './components/Control';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { UserContext } from './components/UserContext';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import UserLogin from './components/UserLogin';
+import UserSignUp from './components/UserSignUp';
 
 
 function App() {
@@ -19,13 +22,15 @@ const parseObject = JSON.parse(grabObject);
   
     const listener = onAuthStateChanged(auth, async (user) => {
       setIsAuthenticated(!!user);
-      // console.log(isAuthenticated);
+      
     });
   
     return () => {
       listener();
     };
   }, [auth.currentUser]);
+
+  
 
   //sets username
   useEffect(() => {
@@ -35,7 +40,7 @@ const parseObject = JSON.parse(grabObject);
     }
   },[window.sessionStorage])
 
-  console.log(userName);
+ console.log(isAuthenticated);
 
 //   const [ authCheck, setAuthCheck ] = useState();
 
@@ -58,11 +63,19 @@ const parseObject = JSON.parse(grabObject);
 // test();
 
   return (
-    <React.Fragment>
+    <Router>
       <UserContext.Provider value={{userName, setUserName}}>
-      <Control />
+        <Routes>
+    
+      
+          <Route path="/" element={<Control authCheck={isAuthenticated}/>} />
+          <Route path="/login" element={<UserLogin />} />
+          <Route path="/signup" element={<UserSignUp />} />
+      
+
+        </Routes>
       </UserContext.Provider>
-    </React.Fragment>
+    </Router>
   );
 }
 

@@ -69,14 +69,7 @@ export default function Jokes(props) {
     }
   }
 
-  function doSignOut() {
-    signOut(auth)
-      .then(function() {
-       
-      }).catch(function(error) {
-        
-      });
-  }
+ 
 
 
 // function submitJoke() {
@@ -124,7 +117,6 @@ const submitOptions = () => {
             {submitOptions()}
           </div>
         </div>
-        <button type="click" onClick={() => doSignOut()} className="btn btn-primary">sign out</button>
       </React.Fragment>
     )
   } else {

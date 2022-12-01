@@ -35,11 +35,9 @@ function doSignOut() {
       <React.Fragment>
         <nav class="navbar navbar-expand-lg header">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">JokeBook</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            <p className="title navbar-brand">JokeBook</p>
             <div class="navbar-nav">
+              <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className=" border border-0 nav-item btn btn-outline-primary">Get the Chrome extension here!</button></a>
               <Link className="header" to="/signup"><button className="nav-item btn btn-outline-primary mx-2">Signup</button></Link>
               <Link className="header" to="/login"><button className="nav-item btn btn-outline-primary">Login</button></Link>
             </div>
@@ -52,13 +50,11 @@ function doSignOut() {
     <React.Fragment>
         <nav class="navbar navbar-expand-lg">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">JokeBook</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-nav">
-            <button class="nav-item btn btn-outline-primary border border-0"><strong>test</strong></button>
-            <button type="click" onClick={() => doSignOut()} className="btn btn-outline-primary mx-2 border border-0">sign out</button>
+            <p className="title navbar-brand">JokeBook</p>
+            <div class="navbar-nav mb-3">
+              <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className=" border border-0 nav-item btn btn-outline-primary">Get the Chrome extension here!</button></a>
+              <button class="nav-item btn btn-outline-primary border border-0"><strong>{auth.currentUser.displayName}</strong></button>
+              <button type="click" onClick={() => doSignOut()} className="btn btn-outline-primary mx-2 border border-0">sign out</button>
             </div>
           </div>
         </nav>

@@ -65,11 +65,11 @@ export default function UserSignUpIn() {
                 placeholder="password"></input>
                 
               </div>
-              <button type="submit" className="sports btn">Login</button>
+              <button type="submit" className="btn btn-outline-primary">Login</button>
             </form>
           </div>
         </div>
-        <p className="text-center mt-3 color-style">New to HumorHub? <Link to="/register">Register an account here!</Link></p>
+        <p className="text-center mt-3 color-style">New to JokeBook? <Link to="/signup">Register an account here!</Link></p>
       </div>
     </React.Fragment>
   );

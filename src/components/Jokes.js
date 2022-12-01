@@ -4,11 +4,12 @@ import  { db } from './../firebase';
 import jokes from '../data/cleanJokes.json';
 import { v4 } from 'uuid';
 import { UserContext } from "./UserContext";
-
+import  UserJokes  from "./UserJokes"
 import { auth } from "../firebase.js";
 import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword } from "firebase/auth";
+import Leaderboard from "./Leaderboard";
 
 
 export default function Jokes(props) {
@@ -20,11 +21,8 @@ export default function Jokes(props) {
     marginTop: 210
   }
 
-
   const authCheck = props.authCheck;
-  const { userName, setUserName} = useContext(UserContext);
   const jokeRef = useRef();
-
   const [displayJoke, setDisplayJoke] = useState('Click for a joke!');
   const [submitIsVisible, setSubmitIsVisible] = useState(false);
   const [logIsVisible, setlogIsVisible] = useState(false);
@@ -46,10 +44,6 @@ export default function Jokes(props) {
     setSubmitIsVisible(!submitIsVisible);
   }
 
-  function changeToLogin() {
-    setlogIsVisible(true);
-  }
-
   //adds joke to db
   const ref = collection(db, "userJokes")
   const handleSave = async (e) => {
@@ -57,7 +51,8 @@ export default function Jokes(props) {
     
     let data = {
       joke: jokeRef.current.value,
-      user: userName,
+      user: auth.currentUser.email,
+      userName: auth.currentUser.displayName,
       id: v4()
     };
 
@@ -69,16 +64,6 @@ export default function Jokes(props) {
     }
   }
 
- 
-
-
-// function submitJoke() {
-//   setDoc(doc(db, 'userJokes', userName),{
-//     joke: jokeRef.current.value,
-//     user: userName,
-//     id: v4()
-//   })
-// }
 const submitOptions = () => {
   if (authCheck) {
     return (
@@ -102,35 +87,46 @@ const submitOptions = () => {
   }
 }
 
-
   if (submitIsVisible === false) {
     return (
       <React.Fragment>
-        <div className="full-screen d-flex align-items-center justify-content-center align-content-center text-center flex-column">
-          <div>
-            <p>
-              {displayJoke}
-            </p>
+        {/* <div className="container"> */}
+          <div className="row rowStyle">
+            <div className="col-2">
+              <UserJokes />
+            </div>
+            <div className="col-8 text-center">
+              <div>
+                <p className="output" onClick={() => {navigator.clipboard.writeText(displayJoke)}}>
+                  {displayJoke}
+                </p>
+              </div>
+              <button type="click" onClick={() => getJoke()} className="btn btn-primary mt-2">Get Joke</button>
+              <div style={submitStyle}>
+                {submitOptions()}
+              </div>
+            </div>
+            <div className="col-2 yut">
+              <Leaderboard />
+            </div>
           </div>
-          <button type="click" onClick={() => getJoke()} className="btn btn-primary">Get Joke</button>
-          <div style={submitStyle}>
-            {submitOptions()}
-          </div>
-        </div>
+        {/* </div> */}
       </React.Fragment>
     )
   } else {
     return (
       <React.Fragment>
-        <div className="full-screen d-flex align-items-center justify-content-center align-content-center text-center flex-column" style={inputStyle}>
-          <div>
-            <form id="jokeForm" onSubmit={handleSave}>
-              <input type="text" ref={jokeRef} placeholder="Enter your joke!"/>
-              <button className="btn btn-primary" type="submit">submit</button>
-            </form>
+        {/* <div className="container"> */}
+          <div className="full-screen d-flex align-items-center justify-content-center align-content-center text-center flex-column" style={inputStyle}>
+            <div>
+              <form id="jokeForm" onSubmit={handleSave}>
+                <input type="text" ref={jokeRef} placeholder="Enter your joke!" required/>
+                <button className="btn btn-primary" type="submit">submit</button>
+              </form>
+            </div>
+            <button type="click" onClick={() => changeView()} className="btn btn-primary">Back to laughing!</button>
           </div>
-          <button type="click" onClick={() => changeView()} className="btn btn-primary">Back to laughing!</button>
-        </div>
+        {/* </div> */}
       </React.Fragment>
     )
   }

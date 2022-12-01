@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { auth } from "../firebase.js";
+import { collection, setDoc, doc, addDoc } from 'firebase/firestore';
+import  { db } from './../firebase';
+import { v4 } from 'uuid';
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword } from "firebase/auth";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function UserSignUpIn() {  
 
@@ -13,66 +15,105 @@ export default function UserSignUpIn() {
   }
   
   const [signUpSuccess, setSignUpSuccess] = useState(null);
-  const [signInSuccess, setSignInSuccess] = useState(null);
-  const [signOutSuccess, setSignOutSuccess] = useState(null);
+  const navigate = useNavigate();
+
+  function navToHome() {
+    navigate('/');
+  }
+
+  function submitUserInfo(event) {
+  setDoc(doc(db, 'users', event.target.email.value),{
+    email: event.target.email.value,
+    user: event.target.userName.value,
+    voteCount: 0,
+    id: v4()
+  })
+}
 
   function doSignUp(event) {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const userName = event.target.userName.value;
+    const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setSignUpSuccess(`You've successfully signed up, ${userCredential.user.email}!`)
-      })
-      .catch((error) => {
+      .then( async (userCredential) => {
+        await console.log(email, password, userName);
+        await submitUserInfo(event);
+        updateProfile(auth.currentUser, {
+          displayName: userName
+        });
+        navToHome();
+        
+       
+      }).catch((error) => {
         setSignUpSuccess(`There was an error signing up: ${error.message}!`)
       });
   }
 
-  // function doSignIn(event) {
-  //   event.preventDefault();
-  //   const email = event.target.signinEmail.value;
-  //   const password = event.target.signinPassword.value;
 
-  //   const auth = getAuth();
-  //   setPersistence(auth, browserSessionPersistence)
-  //     .then(() => {
-  //       return signInWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       setSignInSuccess(`You've successfully signed in as ${userCredential.user.email}!`)
-  //   })
-  //   .catch((error) => {
-  //     setSignInSuccess(`There was an error signing in: ${error.message}!`);
-  //   });
-  // })
-  // }
+  
 
-  // function doSignOut() {
-  //   signOut(auth)
-  //     .then(function() {
-  //       // setSignOutSuccess("You have successfully signed out!");
-  //     }).catch(function(error) {
-  //       // setSignOutSuccess(`There was an error signing out: ${error.message}!`);
-  //     });
-  // }
 
   return (
     <React.Fragment>
-      <h1>Sign up</h1>
+      <div>
       {signUpSuccess}
-      <form onSubmit={doSignUp}>
-        <input
-          type='text'
-          name='email'
-          placeholder='email' />
-        <input
-          type='password'
-          name='password'
-          placeholder='Password' />
-        <button type='submit'>Sign up</button>
-      </form>
+        <div className="card text-center mx-auto p-3" style={cardWidth}>
+          <div>
+            <h3 className="mb-3 card-title">Sign-Up</h3>
+            <form className="form" onSubmit={doSignUp}>
+                <div className="mb-3">
+                  <input 
+                    type="text" 
+                    className="form-control col-xs-3" 
+                    id="exampleInputUserName" size="50"
+                    name="userName" 
+                    aria-describedby="userNameHelp" 
+                    placeholder="User name"
+                    required>
+                  </input>
+                </div>
+                <div className="mb-3">
+                  <input 
+                    type="text" 
+                    className="form-control col-xs-3" 
+                    id="exampleInputEmail1" size="50"
+                    name="email" 
+                    aria-describedby="emailHelp" 
+                    placeholder="Email"
+                    required>
+                  </input>
+                </div>
+                <div className="mb-3">
+                  <input 
+                    type="password" 
+                    className="form-control" 
+                    name="password"
+                    id="exampleInputPassword1" 
+                    placeholder="Password"
+                    required>
+                  </input>
+                </div>
+                <div className="mb-3">
+                  <input 
+                    type="password" 
+                    className="form-control" 
+                    name="password2"
+                    id="exampleInputPassword2" 
+                    placeholder="Confirm password"
+                    required>
+                  </input>
+                </div>
+              <button type="submit" className="btn btn-outline-primary">Register</button>
+              </form>
+          </div>
+        </div>
+        <p className="text-center mt-3">Already have an account? <Link to="/login">Login here</Link></p>
+      </div>
     </React.Fragment>
   );
+
 
 
   // return (

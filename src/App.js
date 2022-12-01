@@ -12,8 +12,6 @@ function App() {
 
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [userName, setUserName] = useState('mikey');
-const [test, setTest] = useState('');
-
 const grabObject = window.sessionStorage.getItem(sessionStorage.key(auth.currentUser));
 const parseObject = JSON.parse(grabObject);
 
@@ -30,8 +28,6 @@ const parseObject = JSON.parse(grabObject);
     };
   }, [auth.currentUser]);
 
-  
-
   //sets username
   useEffect(() => {
     if (grabObject === null) {
@@ -39,28 +35,6 @@ const parseObject = JSON.parse(grabObject);
       setUserName(parseObject.email);
     }
   },[window.sessionStorage])
-
- console.log(isAuthenticated);
-
-//   const [ authCheck, setAuthCheck ] = useState();
-
-//   useEffect(() => {
-//     if (auth.currentUser === null) {
-//       setAuthCheck(null)
-//     } else {
-//       setAuthCheck(!null)
-//     }
-    
-//   }, [auth.currentUser])
-
-// function test() {
-//   if (authCheck === null) {
-//     console.log("not logged");
-//   } else {
-//     console.log("Logged");
-//   }
-// }
-// test();
 
   return (
     <Router>

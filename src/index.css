@@ -1,4 +1,5 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee&display=swap');
 
 body {
   margin: 0;
@@ -9,6 +10,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
+  background: rgb(255,132,245);
+  background: -moz-linear-gradient(245deg, rgba(255,132,245,1) 0%, rgba(247,83,83,1) 44%, rgba(255,197,29,1) 100%);
+  background: -webkit-linear-gradient(245deg, rgba(255,132,245,1) 0%, rgba(247,83,83,1) 44%, rgba(255,197,29,1) 100%);
+  background: linear-gradient(245deg, rgba(255,132,245,1) 0%, rgba(247,83,83,1) 44%, rgba(255,197,29,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff84f5",endColorstr="#ffc51d",GradientType=1);
+  background-repeat: no-repeat;
 }
 
 code {
@@ -16,11 +23,49 @@ code {
     monospace;
 }
 
-/* .full-screen {
-  width: 100vw;
-  height: 100vh;
-} */
-
 .header {
   text-decoration: none;
+}
+
+.title {
+  color: white;
+  text-shadow: 2px 2px #ff0000;
+  font-family: 'Bungee', cursive;
+  font-size: 30px;
+}
+
+.output {
+  font-family:"Abril Fatface", sans-serif;
+  background: linear-gradient(to right,rgb(250, 157, 242),rgb(255, 255, 255),rgb(255, 197, 29));
+  background-size: 200% 200%;
+  animation: rainbow 2s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: white;
+  font-size:2rem;
+  width:100%;
+  display:block;
+  text-align:center;
+  transition: color .2s ease-in-out;
+  font-weight:900;
+}
+
+.output:hover{
+  color:rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+@keyframes rainbow { 
+  0%{background-position:left}
+  50%{background-position:right}
+  100%{background-position:left}
+}
+
+.test {
+  margin-left: 10px;
+}
+
+.rowStyle {
+  margin-left: 20px;
+  margin-right: 20px;
 }

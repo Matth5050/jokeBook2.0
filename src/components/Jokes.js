@@ -48,16 +48,15 @@ export default function Jokes(props) {
   const ref = collection(db, "userJokes")
   const handleSave = async (e) => {
     e.preventDefault();
-    
-    let data = {
-      joke: jokeRef.current.value,
-      user: auth.currentUser.email,
-      userName: auth.currentUser.displayName,
-      id: v4()
-    };
 
     try{
-      addDoc(ref, data);
+      setDoc(doc(db, "userJokes", auth.currentUser.email), {
+        joke: jokeRef.current.value,
+        user: auth.currentUser.email,
+        userName: auth.currentUser.displayName,
+        voteTally: 0,
+        id: v4()
+      })
       document.getElementById("jokeForm").reset();
     } catch (e) {
       console.log(e);

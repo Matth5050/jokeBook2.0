@@ -7,8 +7,7 @@ import UserSignUpIn from "./UserLogin.js";
 export default function Control(props) {
 
 const authCheck = props.authCheck
-console.log(authCheck);
-  // if (auth.currentUser === null) {
+
     return (
       <React.Fragment>
         <Header />
@@ -17,5 +16,5 @@ console.log(authCheck);
       </React.Fragment>
     )
   }
-// }
+
 

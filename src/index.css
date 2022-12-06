@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
 
 body {
   margin: 0;
@@ -27,11 +28,34 @@ code {
   text-decoration: none;
 }
 
+.linkText {
+  text-decoration: none;
+  color:rgb(117, 248, 248);
+  transition: 500ms;
+  text-shadow: 2px 2px #ff0000;
+}
+
+.linkText:hover {
+  text-decoration: none;
+  color:rgb(192, 12, 123)
+  /* color:rgb(159, 245, 245); */
+}
+
+
 .title {
   color: white;
   text-shadow: 2px 2px #ff0000;
   font-family: 'Bungee', cursive;
   font-size: 30px;
+  transition: 400ms;
+}
+
+.title:hover {
+  color: pink;
+  text-shadow: 2px 2px #ff0000;
+  font-family: 'Bungee', cursive;
+  font-size: 30px;
+ 
 }
 
 .output {
@@ -42,7 +66,7 @@ code {
   background-clip: text;
   -webkit-background-clip: text;
   color: white;
-  font-size:2rem;
+  font-size:25px;
   width:100%;
   display:block;
   text-align:center;
@@ -61,11 +85,29 @@ code {
   100%{background-position:left}
 }
 
-.test {
-  margin-left: 10px;
-}
-
 .rowStyle {
   margin-left: 20px;
   margin-right: 20px;
+  margin-top: 100px;
+}
+
+.bodyText {
+  color: white;
+  text-shadow: 2px 2px #ff0000;
+  font-family: 'Bungee', cursive;
+}
+
+.smallText {
+  font-family: 'Bungee', cursive;
+  color: white;
+}
+
+
+.userJokeText {
+  font-family:"Abril Fatface", sans-serif;
+  color: white;
+}
+
+.bi {
+  margin-left: 10px;
 }

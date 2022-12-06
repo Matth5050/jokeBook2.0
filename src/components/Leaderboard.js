@@ -19,7 +19,8 @@ function Leaderboard() {
             id: doc.data().id,
           });
         });
-        setUserList(users);
+        const valuesAsceSorted = Object.values(users).sort(function(a,b){return b.voteCount - a.voteCount}).slice(0,5);
+        setUserList(valuesAsceSorted);
         setUsersLoaded(true);
       },
       (error) => {
@@ -38,8 +39,8 @@ if (userList) {
   test = <>
           {Object.values(userList).map((entry) => (
           <>
-            <tr>
-              <td className='text-body'><strong>{entry.voteCount}</strong> - {entry.user}</td>
+            <tr >
+              <td className='text-white'><strong className='userJokeText'>{entry.voteCount}</strong> - {entry.user}</td>
             </tr>
           </>
         ))}
@@ -48,9 +49,9 @@ if (userList) {
 
   return (
     <React.Fragment>
-    <div className=" ml-5 bg-transparent">
+    <div className="bg-transparent">
       <table className="scrollable">
-        <thead className='border-bottom border-dark'>Most funny list</thead>
+        <thead className='border-bottom border-white bodyText fs-4'>Most funny list</thead>
         <tbody>
           {usersLoaded ? test : null}
         </tbody>

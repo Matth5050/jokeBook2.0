@@ -6,15 +6,15 @@ import { v4 } from 'uuid';
 import { signOut } from "firebase/auth";
 import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
+import LogHeader from "./LogHeader";
 
 export default function UserSignUpIn() {  
 
   const cardWidth = {
     width: "18rem",
-    marginTop: "250px",
+    marginTop: "120px",
   }
   
-  const [signUpSuccess, setSignUpSuccess] = useState(null);
   const navigate = useNavigate();
 
   function navToHome() {
@@ -45,23 +45,17 @@ export default function UserSignUpIn() {
         });
         navToHome();
         
-       
       }).catch((error) => {
-        setSignUpSuccess(`There was an error signing up: ${error.message}!`)
+
       });
   }
 
-
-  
-
-
   return (
     <React.Fragment>
-      <div>
-      {signUpSuccess}
-        <div className="card text-center mx-auto p-3" style={cardWidth}>
+      <LogHeader />
+        <div className="card text-center mx-auto p-3 bg-transparent border-0" style={cardWidth}>
           <div>
-            <h3 className="mb-3 card-title">Sign-Up</h3>
+            <h3 className="mb-3 card-title title">Sign-Up</h3>
             <form className="form" onSubmit={doSignUp}>
                 <div className="mb-3">
                   <input 
@@ -105,12 +99,11 @@ export default function UserSignUpIn() {
                     required>
                   </input>
                 </div>
-              <button type="submit" className="btn btn-outline-primary">Register</button>
+              <button type="submit" className="btn btn-outline-primary border-white bodyText">Register</button>
               </form>
           </div>
         </div>
-        <p className="text-center mt-3">Already have an account? <Link to="/login">Login here</Link></p>
-      </div>
+        <p className="text-center mt-3 color-style smallText">Already have an account? <Link className="linkText" to="/login">Login here</Link></p>
     </React.Fragment>
   );
 

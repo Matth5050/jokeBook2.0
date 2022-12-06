@@ -4,13 +4,13 @@ import { getFirestore } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDzOcLIe3zKbwXkdapZo6HsAjVfao2idyU",
-  authDomain: "jokebook-e7404.firebaseapp.com",
-  projectId: "jokebook-e7404",
-  storageBucket: "jokebook-e7404.appspot.com",
-  messagingSenderId: "553927241129",
-  appId: "1:553927241129:web:433a66306608e23217a8b8",
-  measurementId: "G-0ZB1XM11E7"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 

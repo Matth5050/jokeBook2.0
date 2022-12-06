@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { auth } from "../firebase.js";
-import { signOut } from "firebase/auth";
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword } from "firebase/auth";
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
+import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
+import LogHeader from "./LogHeader";
 
 export default function UserSignUpIn() {  
 
   const cardWidth = {
     width: "18rem",
-    marginTop: "250px",
+    marginTop: "120px",
   }
   
   const [signUpSuccess, setSignUpSuccess] = useState(null);
@@ -41,10 +40,11 @@ export default function UserSignUpIn() {
 
   return (
     <React.Fragment>
+      <LogHeader />
       <div>
-        <div className="card text-center mx-auto p-3 login-card" style={cardWidth}>
+        <div className="card text-center mx-auto p-3 bg-transparent border-0" style={cardWidth}>
           <div>
-            <h3 className="mb-3 card-title">Login</h3>
+            <h3 className="mb-3 card-title bodyText fs-1">Login</h3>
             <form className="form" onSubmit={doSignIn}>
               <div className="mb-3">
                 <input 
@@ -65,11 +65,11 @@ export default function UserSignUpIn() {
                 placeholder="password"></input>
                 
               </div>
-              <button type="submit" className="btn btn-outline-primary">Login</button>
+              <button type="submit" className="btn btn-outline-primary border-white bodyText">Login</button>
             </form>
           </div>
         </div>
-        <p className="text-center mt-3 color-style">New to JokeBook? <Link to="/signup">Register an account here!</Link></p>
+        <p className="text-center mt-3 color-style smallText">New to JokeBook? <Link to="/signup" className="linkText">Register an account here!</Link></p>
       </div>
     </React.Fragment>
   );

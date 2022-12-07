@@ -47,6 +47,7 @@ code {
   text-shadow: 2px 2px #ff0000;
   font-family: 'Bungee', cursive;
   font-size: 30px;
+  cursor: pointer;
   transition: 400ms;
 }
 
@@ -55,7 +56,14 @@ code {
   text-shadow: 2px 2px #ff0000;
   font-family: 'Bungee', cursive;
   font-size: 30px;
- 
+}
+
+.headings {
+  color: white;
+  text-shadow: 2px 2px #ff0000;
+  font-family: 'Bungee', cursive;
+  font-size: 30px;
+  transition: 400ms;
 }
 
 .output {
@@ -114,9 +122,25 @@ code {
 
 .bi-emoji-expressionless {
   margin-right: 25px;
+  transition: 400ms;
+  cursor: pointer;
+}
+
+.bi-emoji-expressionless:hover {
+  color:red;
+}
+
+.bi-emoji-laughing {
+  transition: 400ms;
+  cursor: pointer;
+}
+
+.bi-emoji-laughing:hover {
+  color:green;
 }
 
 .tally {
   font-family:"Abril Fatface", sans-serif;
   color: white;
 }
+

@@ -11,7 +11,7 @@ import UserSignUp from './components/UserSignUp';
 function App() {
 
 const [isAuthenticated, setIsAuthenticated] = useState(false);
-const [userName, setUserName] = useState('mikey');
+const [submitIsVisible, setSubmitIsVisible] = useState(false);
 const grabObject = window.sessionStorage.getItem(sessionStorage.key(auth.currentUser));
 const parseObject = JSON.parse(grabObject);
 
@@ -29,16 +29,16 @@ const parseObject = JSON.parse(grabObject);
   }, [auth.currentUser]);
 
   //sets username
-  useEffect(() => {
-    if (grabObject === null) {
-    } else {
-      setUserName(parseObject.email);
-    }
-  },[window.sessionStorage])
+  // useEffect(() => {
+  //   if (grabObject === null) {
+  //   } else {
+  //     setUserName(parseObject.email);
+  //   }
+  // },[window.sessionStorage])
 
   return (
     <Router>
-      <UserContext.Provider value={{userName, setUserName}}>
+      <UserContext.Provider value={{submitIsVisible, setSubmitIsVisible}}>
         <Routes>
     
       

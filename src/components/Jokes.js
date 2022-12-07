@@ -24,8 +24,7 @@ export default function Jokes(props) {
   const authCheck = props.authCheck;
   const jokeRef = useRef();
   const [displayJoke, setDisplayJoke] = useState('Click for a joke!');
-  const [submitIsVisible, setSubmitIsVisible] = useState(false);
-  const [logIsVisible, setlogIsVisible] = useState(false);
+  const { submitIsVisible, setSubmitIsVisible } = useContext(UserContext);
 
   function getRandomInt() {
     const min = Math.ceil(0);

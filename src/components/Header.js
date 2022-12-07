@@ -1,8 +1,10 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useContext} from "react";
 import PropTypes from 'prop-types';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate} from "react-router-dom";
 import { auth } from "../firebase";
+import { UserContext } from "./UserContext";
+import  UserJokes  from "./UserJokes"
 
 
 export default function Header() {
@@ -15,6 +17,7 @@ export default function Header() {
     textDecoration: "none"
   }
 
+const { submitIsVisible, setSubmitIsVisible } = useContext(UserContext);
 const navigate = useNavigate();
 
 function doSignOut() {
@@ -26,12 +29,16 @@ function doSignOut() {
     });
 }
 
+const returnSplash = () => {
+  setSubmitIsVisible(false);
+}
+
   if (auth.currentUser == null) {
     return (
       <React.Fragment>
         <nav class="navbar navbar-expand-lg header">
           <div class="container-fluid">
-            <p className="navbar-brand title"><Link to="/" className="title" style={brand}>JokeBook</Link></p>
+            <p className="navbar-brand title"><Link to="/" className="title" onClick={returnSplash} style={brand}>JokeBook</Link></p>
             <div class="navbar-nav bodyText">
               <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className="border border-0 nav-item btn btn-outline-primary bodyText">Get the Chrome extension here!</button></a>
               <Link className="header" to="/login"><button className="nav-item btn btn-outline-primary bodyText" style={usernameButton}>Login</button></Link>
@@ -46,7 +53,7 @@ function doSignOut() {
     <React.Fragment>
         <nav class="navbar navbar-expand-lg">
           <div class="container-fluid">
-            <p className="title navbar-brand">JokeBook</p>
+            <p className="title navbar-brand " onClick={returnSplash}>JokeBook</p>
             <div class="navbar-nav mb-3">
               <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className=" border border-0 nav-item btn btn-outline-primary bodyText">Get the Chrome extension here!</button></a>
               <button class="nav-item btn btn-outline-primary border-white bodyText"><strong>{auth.currentUser.displayName}</strong></button>

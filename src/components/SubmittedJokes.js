@@ -1,29 +1,113 @@
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot, doc, updateDoc, deleteDoc, setDoc, increment } from 'firebase/firestore';
+import { collection, onSnapshot, doc, updateDoc, getDocs, setDoc, increment } from 'firebase/firestore';
 import  { auth, db } from './../firebase.js';
+import { v4 } from 'uuid';
 
 function SubmittedJokes(props) {
+
+  const [karmaStatus, setKarmaStatus ] = useState(null);
+  const [karmaList, setKarmaList] = useState(null);
+
+  // useEffect(() => { 
+  //   const unSubscribe = onSnapshot(
+  //     collection(db, "users" , auth.currentUser.email, "karma"),
+  //     (collectionSnapshot) => {
+  //       const karma = [];
+  //       collectionSnapshot.forEach((doc) => {
+  //         karma.push({
+  //           user: doc.data().user,
+  //           karma: doc.data(),karma,
+  //           id: doc.data().id,
+  //         });
+  //       });
+   
+  //       setKarmaList(karmaList);
+  //       // setUsersLoaded(true);
+  //     },
+  //     (error) => {
+  //       console.log("error")
+  //     }
+  //   );
+  //   return () => unSubscribe();
+  // }, []);
+
+  useEffect(() => {
+    const collectionRef = collection(db, "users", auth.currentUser.email, "karma");
+    const jokeKarma = [];
+    onSnapshot(collectionRef, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // console.log("Id: ", doc.id, "Data: ", doc.data());
+        jokeKarma.push({
+          id: doc.data().id,
+          jokeId: doc.data().jokeId,
+          karma: doc.data().karma,
+          votedUser: doc.data().votedUser,
+        })
+      });
+    });
+    const bart = async () => {
+      await setKarmaList(jokeKarma)
+      await karmaCheck();
+    }
+   bart();
+  }, [])
+
+  console.log(karmaStatus);
+  console.log(karmaList);
+
+
+
+
+
+ 
+  
+
+  
+    const karmaCheck = async () => {
+
+      for (var i = 0; i < karmaList.length; i++) {
+        if (karmaList[i].jokeId == props.id) {
+          if (karmaList[i].karma === true) {
+           await setKarmaStatus(true);
+          } else {
+           await setKarmaStatus(false);
+          }
+        } else {
+         await setKarmaStatus(null);
+        }
+      }
+    }
+
+
 
  //handles upvotes/downvotes
   const upVoteFunction = async () => {
     const voteRef = doc(db, "users", props.user);
     const jokeRef = doc(db, "userJokes", props.user);
-    // const voteRef = doc(db, "users", props.userName);
     if (auth.currentUser == null) {
       alert("You must be logged in to vote! So much for democracy :(");
     } else {
+      await setDoc(doc(db, "users", auth.currentUser.email, "karma", props.id), {
+        votedUser: auth.currentUser.email,
+        karma: true,
+        jokeId: props.id,
+        id: v4()
+      })
       await updateDoc(voteRef, {voteCount: increment(1)});
       await updateDoc(jokeRef, {voteTally: increment(1)});
-      console.log("upvote");
   }}
 
   const downVoteFunction = async () => {
     const voteRef = doc(db, "users", props.user);
     const jokeRef = doc(db, "userJokes", props.user);
-    // const voteRef = doc(db, "users", props.userName);
     if (auth.currentUser == null) {
       alert("You must be logged in to vote! So much for democracy :(");
     } else {
+      await setDoc(doc(db, "users", auth.currentUser.email, "karma", props.id), {
+        votedUser: auth.currentUser.email,
+        karma: false,
+        id: v4()
+      })
       await updateDoc(voteRef, {voteCount: increment(-1)});
       await updateDoc(jokeRef, {voteTally: increment(-1)});
       console.log("upvote");

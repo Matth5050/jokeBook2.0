@@ -9,25 +9,29 @@ const karmaList = props.karmaList;
 const jokeId = props.id;
 const [goodKarmaStatus, setGoodKarmaStatus] = useState(null);
 const [badKarmaStatus, setBadKarmaStatus] = useState(null);
+const [test, setTest] = useState();
+
+// useEffect(() => {
+//   setTest()
+// }, [goodKarmaStatus])
 
 //checks if user has already liked a joke and sets styling
 useEffect(() => {
   const karmaCheck = () => {
-    console.log("click");
     for (let i = 0; i < karmaList.length; i++) {
       if (karmaList[i].jokeId === jokeId) {
         if(karmaList[i].karma === true) {
           setGoodKarmaStatus("green");
-          setBadKarmaStatus("none");
+          setBadKarmaStatus("");
         } else if (karmaList[i].karma === false) {
           setBadKarmaStatus("red");
-          setGoodKarmaStatus("none");
+          setGoodKarmaStatus("");
         } else {
-          setGoodKarmaStatus("none");
-          setBadKarmaStatus("none");
+          setGoodKarmaStatus("");
+          setBadKarmaStatus("");
         }
       } else {
-        console.log("nothing")
+        
       }
     }
   };
@@ -48,6 +52,8 @@ useEffect(() => {
         jokeId: props.id,
         id: v4()
       })
+      setGoodKarmaStatus("green");
+      setBadKarmaStatus("");
       await updateDoc(voteRef, {voteCount: increment(1)});
       await updateDoc(jokeRef, {voteTally: increment(1)});
   }}
@@ -64,9 +70,10 @@ useEffect(() => {
         jokeId: props.id,
         id: v4()
       })
+      setBadKarmaStatus("red");
+      setGoodKarmaStatus("");
       await updateDoc(voteRef, {voteCount: increment(-1)});
       await updateDoc(jokeRef, {voteTally: increment(-1)});
-      console.log("upvote");
   }}
 
   return (

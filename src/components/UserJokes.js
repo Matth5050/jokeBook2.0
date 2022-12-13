@@ -86,7 +86,7 @@ function UserJokes() {
     <React.Fragment>
     <div className=" ml-5 bg-transparent">
       <table className="scrollable">
-        <thead className='border-bottom border-white bodyText fs-4 text-center'>Recent Jokes</thead>
+        <thead className='border-bottom border-white bodyText fs-4'>Recent Jokes</thead>
         <tbody className='ml-5 bg-transparent'>
           { (isLoaded && jokesLoaded) ? test : null}
         </tbody>

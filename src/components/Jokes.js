@@ -14,6 +14,8 @@ export default function Jokes(props) {
 
   const submitStyle = {
     marginTop: 120,
+    width: 360
+   
   }
   const inputStyle = {
     marginTop: 210
@@ -92,35 +94,30 @@ const submitOptions = () => {
   if (submitIsVisible === false) {
     return (
       <React.Fragment>
-        {/* <div className="container"> */}
-          <div className="row rowStyle ">
-            <div className="col-3 tut">
-              <UserJokes />
-              <div style={submitStyle}>
-                {submitOptions()}
-              </div>
-            </div>
-            <div className="col-6 text-center">
+          <div className="row rowStyle">
+            <div className="col-9 text-center">
               <div>
                 <p className="output" onClick={() => {navigator.clipboard.writeText(displayJoke)}}>
                   {displayJoke}
                 </p>
               </div>
               <button type="click" onClick={() => getJoke()} className="btn btn-lg btn-outline-primary mt-2 bodyText border-white">Get Joke</button>
-              
+              <div className="mx-auto" style={submitStyle}>
+                {submitOptions()}
+              </div>
             </div>
-            <div className="col-3 d-flex  justify-content-center  ">
+            <div className="col-3 flex-column  justify-content-center">
               <Leaderboard />
+              <div className="mt-5">
+                <UserJokes />
+              </div>
             </div>
-            
           </div>
-        {/* </div> */}
       </React.Fragment>
     )
   } else {
     return (
       <React.Fragment>
-        {/* <div className="container"> */}
           <div className="full-screen d-flex align-items-center justify-content-center align-content-center text-center flex-column" style={inputStyle}>
             <div>
               <form  id="jokeForm" onSubmit={handleSave}>
@@ -130,7 +127,6 @@ const submitOptions = () => {
             </div>
             <button type="click" onClick={() => changeView()} className="btn btn-outline-primary bodyText border-white mt-5">Back to laughing!</button>
           </div>
-        {/* </div> */}
       </React.Fragment>
     )
   }

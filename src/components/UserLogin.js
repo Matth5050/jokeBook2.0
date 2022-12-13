@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
-import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
+import { BrowserRouter as Link, useNavigate } from "react-router-dom";
 import LogHeader from "./LogHeader";
 
 export default function UserSignUpIn() {  

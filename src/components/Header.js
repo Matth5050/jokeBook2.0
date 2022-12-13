@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext} from "react";
-import PropTypes from 'prop-types';
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { Link, useNavigate} from "react-router-dom";
+import React, { useContext } from "react";
+import { signOut } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { UserContext } from "./UserContext";
-import  UserJokes  from "./UserJokes"
+
 
 
 export default function Header() {

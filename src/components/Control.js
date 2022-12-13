@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { db, auth } from './../firebase.js'
+import React from "react";
 import Header from './Header';
 import Jokes from './Jokes';
-import UserSignUpIn from "./UserLogin.js";
+
 
 export default function Control(props) {
 

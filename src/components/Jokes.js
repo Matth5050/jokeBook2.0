@@ -1,14 +1,12 @@
 import React, { useState, useRef, useContext } from "react";
-import { collection, setDoc, doc, addDoc } from 'firebase/firestore';
+import { collection, setDoc, doc } from 'firebase/firestore';
 import  { db } from './../firebase';
 import jokes from '../data/cleanJokes.json';
 import { v4 } from 'uuid';
 import { UserContext } from "./UserContext";
 import  UserJokes  from "./UserJokes"
 import { auth } from "../firebase.js";
-import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword } from "firebase/auth";
 import Leaderboard from "./Leaderboard";
 
 

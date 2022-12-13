@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot, doc, updateDoc, getDocs, setDoc, increment } from 'firebase/firestore';
+import { doc, updateDoc, setDoc, increment } from 'firebase/firestore';
 import  { auth, db } from './../firebase.js';
 import { v4 } from 'uuid';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import  { auth, db } from './../firebase.js';
 import SubmittedJokes from './SubmittedJokes.js';

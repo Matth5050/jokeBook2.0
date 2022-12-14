@@ -3,7 +3,7 @@ import { setDoc, doc } from 'firebase/firestore';
 import  { db } from './../firebase';
 import { v4 } from 'uuid';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { BrowserRouter as Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogHeader from "./LogHeader";
 
 export default function UserSignUpIn() {  

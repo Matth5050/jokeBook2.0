@@ -11,10 +11,6 @@ const [goodKarmaStatus, setGoodKarmaStatus] = useState(null);
 const [badKarmaStatus, setBadKarmaStatus] = useState(null);
 const [test, setTest] = useState();
 
-// useEffect(() => {
-//   setTest()
-// }, [goodKarmaStatus])
-
 //checks if user has already liked a joke and sets styling
 useEffect(() => {
   const karmaCheck = () => {
@@ -38,7 +34,6 @@ useEffect(() => {
   karmaCheck();
 }, [karmaList, props])
   
-
  //handles upvotes/downvotes
   const upVoteFunction = async () => {
     const voteRef = doc(db, "users", props.user);

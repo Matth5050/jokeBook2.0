@@ -28,14 +28,6 @@ const parseObject = JSON.parse(grabObject);
     };
   }, [auth.currentUser]);
 
-  //sets username
-  // useEffect(() => {
-  //   if (grabObject === null) {
-  //   } else {
-  //     setUserName(parseObject.email);
-  //   }
-  // },[window.sessionStorage])
-
   return (
     <Router>
       <UserContext.Provider value={{submitIsVisible, setSubmitIsVisible}}>

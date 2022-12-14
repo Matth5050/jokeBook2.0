@@ -11,7 +11,6 @@ const authCheck = props.authCheck
       <React.Fragment>
         <Header />
         <Jokes authCheck={authCheck}/>
-        {/* <Submit /> */}
       </React.Fragment>
     )
   }

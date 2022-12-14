@@ -39,8 +39,8 @@ const returnSplash = () => {
           <div class="container-fluid">
             <p className="navbar-brand title"><Link to="/" className="title" onClick={returnSplash} style={brand}>JokeBook</Link></p>
             <div class="navbar-nav bodyText">
-              <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className="border border-0 nav-item btn btn-outline-primary bodyText">Get the Chrome extension here!</button></a>
-              <Link className="header" to="/login"><button className="nav-item btn btn-outline-primary bodyText" style={usernameButton}>Login</button></Link>
+              <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className="border border-0 btn btn-outline-primary bodyText mx-2">Get the Chrome extension here!</button></a>
+              <Link className="header" to="/login"><button className="nav-item btn btn-outline-primary bodyText mx-1" style={usernameButton}>Login</button></Link>
               <Link className="header" to="/signup"><button className="nav-item btn btn-outline-primary mx-2 bodyText" style={usernameButton}>Signup</button></Link>
             </div>
           </div>
@@ -54,8 +54,8 @@ const returnSplash = () => {
           <div class="container-fluid">
             <p className="title navbar-brand " onClick={returnSplash}>JokeBook</p>
             <div class="navbar-nav mb-3">
-              <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className=" border border-0 nav-item btn btn-outline-primary bodyText">Get the Chrome extension here!</button></a>
-              <button class="nav-item btn btn-outline-primary border-white bodyText"><strong>{auth.currentUser.displayName}</strong></button>
+              <a href="https://chrome.google.com/webstore/detail/jokebook/nlhdhpfhfopniaajbgfichnlpbnndhfk"><button className=" border border-0 nav-item btn btn-outline-primary bodyText mx-2">Get the Chrome extension here!</button></a>
+              <button class="nav-item btn btn-outline-primary border-white bodyText mx-1"><strong>{auth.currentUser.displayName}</strong></button>
               <button type="click" onClick={() => doSignOut()} className="btn btn-outline-primary mx-2 border-white bodyText">sign out</button>
             </div>
           </div>

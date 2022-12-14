@@ -38,9 +38,7 @@ code {
 .linkText:hover {
   text-decoration: none;
   color:rgb(192, 12, 123)
-  /* color:rgb(159, 245, 245); */
 }
-
 
 .title {
   color: white;
@@ -142,5 +140,20 @@ code {
 .tally {
   font-family:"Abril Fatface", sans-serif;
   color: white;
+}
+
+.btn {
+  border: 2px solid #3c73ff;
+  color: #fff;
+  transition: .3s;
+}
+.btn:hover {
+  box-shadow: 8px 8px #99bdff;
+  transition: .3s;
+}
+
+.btn:active {
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  transform: translateY(4px);
 }
 
